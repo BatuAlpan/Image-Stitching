@@ -13,11 +13,11 @@ ransacTol = 5.0
 keypointThr = 100
 distanceThr = 250
 
-image1 = cv.imread(r"example6\example6-1.jpeg")
-image2 = cv.imread(r"example6\example6-2.jpeg")
-image3 = cv.imread(r"example6\example6-3.jpeg")
-image4 = cv.imread(r"example6\example6-4.jpeg")
-image5 = cv.imread(r"example6\example6-5.jpeg")
+image1 = cv.imread(r"example4\example4-1.jpeg")
+image2 = cv.imread(r"example4\example4-2.jpeg")
+image3 = cv.imread(r"example4\example4-3.jpeg")
+image4 = cv.imread(r"example4\example4-4.jpeg")
+image5 = cv.imread(r"example4\example4-5.jpeg")
 
 images = [image1, image2, image3, image4, image5]
 

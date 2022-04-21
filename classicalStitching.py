@@ -12,7 +12,6 @@ import argparse
 #print(imagePaths)
 
 #Hyperparameters
-<<<<<<< HEAD
 ransacTol = 0.5
 
 
@@ -25,22 +24,6 @@ image3 = cv.cvtColor(image3, cv.COLOR_BGR2RGB)
 image4 = cv.imread(r"example4\example4-4.jpeg")
 image4 = cv.cvtColor(image4, cv.COLOR_BGR2RGB)
 image5 = cv.imread(r"example4\example4-5.jpeg")
-=======
-ransacTol = 5.0
-keypointThr = 10
-distanceThr = 500
-
-
-image1 = cv.imread(r"example6\example6-1.jpeg")
-image1 = cv.cvtColor(image1, cv.COLOR_BGR2RGB)
-image2 = cv.imread(r"example6\example6-2.jpeg")
-image2 = cv.cvtColor(image2, cv.COLOR_BGR2RGB)
-image3 = cv.imread(r"example6\example6-3.jpeg")
-image3 = cv.cvtColor(image3, cv.COLOR_BGR2RGB)
-image4 = cv.imread(r"example6\example6-4.jpeg")
-image4 = cv.cvtColor(image4, cv.COLOR_BGR2RGB)
-image5 = cv.imread(r"example6\example6-5.jpeg")
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
 image5 = cv.cvtColor(image5, cv.COLOR_BGR2RGB)
 
 images = [image1, image2, image3, image4, image5]
@@ -83,36 +66,23 @@ for i in range(len(images)-1):
     matches = sorted(matches, key = lambda x: x.distance)
     imMatches = cv.drawMatches(image1, keypoints1, image2, keypoints2, matches[1:10], None, flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
-<<<<<<< HEAD
     #plt.imshow(imMatches)
     #cv.imwrite("Matches.jpg", imMatches)
     #plt.show()
-=======
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
     print(f"Number of matches: {len(matches)}")
 
     #Homography matrix is found if the images can be stitched
     points1, points2, flag = np.array([]), np.array([]), 0
     #Thresholding is done to eliminate non-maching images
-<<<<<<< HEAD
     threshold = [matches[i].distance for i in range(len(matches)) if matches[i].distance < 100] 
 
     if len(threshold) < 10:
-=======
-    impKey = [matches[i].distance for i in range(len(matches)) if matches[i].distance < 100] 
-
-    if len(impKey) < keypointThr:
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
         print("These images cannot be stitched.")
         flag = 1
 
     if flag == 0:
         for i in range(len(matches)):
-<<<<<<< HEAD
             if matches[i].distance > 500:
-=======
-            if matches[i].distance > distanceThr: #Points above a certain threshold are ignored to make the code faster. 
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
                 continue
             points1 = np.append(points1, keypoints1[matches[i].queryIdx].pt) #Indices of the matches are found and then the keypoints and their coordinates (.pt) are found. 
             points2 = np.append(points2, keypoints2[matches[i].trainIdx].pt)
@@ -120,11 +90,7 @@ for i in range(len(images)-1):
         points1 = points1.reshape(-1,1,2)
         points2 = points2.reshape(-1,1,2)
 
-<<<<<<< HEAD
-        homograhyMat, mask = cv.findHomography(points1, points2, cv.RANSAC, 5.0)
-=======
         homograhyMat, mask = cv.findHomography(points1, points2, cv.RANSAC, ransacTol)
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
     elif flag == 1:
         print("Images cannot be stitched.")
         
@@ -132,14 +98,8 @@ for i in range(len(images)-1):
     homograhyMatInv = np.linalg.inv(homograhyMat)
     max_x, max_y = findEdgeLoc(homograhyMatInv,image2)
     im1_x, im1_y = np.size(image1,1), np.size(image1,0)
-<<<<<<< HEAD
     output = cv.warpPerspective(image2,homograhyMat,(max(max_x,im1_x),max(max_y,im1_y)),dst=output,flags=cv.WARP_INVERSE_MAP, borderValue=cv.BORDER_CONSTANT) #Image 2 is warped with homography matrix.
     
-=======
-    output = cv.warpPerspective(image2,homograhyMat,(max(max_x,im1_x),max(max_y,im1_y)),dst=output,
-    flags=cv.WARP_INVERSE_MAP, borderValue=cv.BORDER_CONSTANT) #Image 2 is warped with homography matrix.
-
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
     #Images are added by throwing away the black gaps 
     img1Gray = cv.cvtColor(image1, cv.COLOR_BGR2GRAY)
     ret, mask = cv.threshold(img1Gray, 1, 255, cv.THRESH_BINARY)
@@ -152,11 +112,6 @@ for i in range(len(images)-1):
     dst = cv.add(img1,output_img1)
     output[0:image1.shape[0], 0:image1.shape[1]] = dst
 
-<<<<<<< HEAD
-=======
-    #output = cv.cvtColor(output, cv.COLOR_BGR2RGB)
-
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
     #cv.imshow("Image 1", image1)
     #cv.imshow("Image 2", image2)
     #cv.waitKey(0)
@@ -167,7 +122,6 @@ for i in range(len(images)-1):
     #cv.imwrite("image2key.jpg", image2key)
     #cv.waitKey(0)
 
-<<<<<<< HEAD
 
 
     
@@ -192,29 +146,4 @@ print(f'Time: {stop - start} sec.')
 plt.imshow(output)
 RGB_Output = cv.cvtColor(output, cv.COLOR_BGR2RGB)
 cv.imwrite("Result.jpg", RGB_Output)
-=======
-    #plt.imshow(imMatches)
-    #cv.imwrite("Matches.jpg", imMatches)
-    #plt.show()
-
-    #result = cv.resize(output,[500, 400], cv.INTER_LINEAR)
-    #cv.imshow("Result",result)
-    #cv.waitKey(0)
-
-    #if showSteps = True:
-    #plt.imshow(output)
-    #plt.show()
-
-    #alpha = 0.5
-    #output = cv.addWeighted(output[0:image1.shape[0], 0:image1.shape[1]], alpha, image2, 1-alpha, 0.0)
-    #plt.imshow(output)
-    #plt.show()
-
-#cv.imwrite("Output2Binary.jpg", output)
-#output = cv.cvtColor(output, cv.COLOR_BGR2RGB)
-stop = timeit.default_timer()
-print(f'Time: {stop - start} sec.') 
-
-plt.imshow(output)
->>>>>>> e6481fdeaba8d3b44e5a6762f325d316f6cc4f7d
 plt.show()
