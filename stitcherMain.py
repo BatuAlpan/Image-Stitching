@@ -32,4 +32,4 @@ output = stitcher.stitchImages(images,ransacTol,keypointThr,distanceThr)
 if output is not None:    
     plt.imshow(output)
     plt.show()
-    cv.imwrite("Example6Output.jpg", cv.cvtColor(output, cv.COLOR_BGR2RGB)) 
+    cv.imwrite("Results\Example6Output.jpg", cv.cvtColor(output, cv.COLOR_BGR2RGB)) 
