@@ -21,8 +21,10 @@ image5 = cv.imread(r"example6\example6-5.jpeg")
 
 images = [image1, image2, image3, image4, image5]
 
-for image in images:
+#Convert color from BGR to RGB 
+for id,image in enumerate(images):
     image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
+    images[id] = image
 
 stitcher = sis()
 output = stitcher.stitchImages(images,ransacTol,keypointThr,distanceThr)
