@@ -47,7 +47,7 @@ class standardImageStitcher:
             #Homography matrix is found if the images can be stitched
             points1, points2, flag = np.array([]), np.array([]), 0
             #Thresholding is done to eliminate non-maching images
-            impKey = [matches[i].distance for i in range(len(matches)) if matches[i].distance < 100] 
+            impKey = [matches[i].distance for i in range(len(matches)) if matches[i].distance < distanceThr] 
 
             if len(impKey) < keypointThr:
                 flag = 1
@@ -105,7 +105,7 @@ class standardImageStitcher:
         print(f'Time: {(stop - start):.3f} sec.') 
         return output
 
-if __name__ == '__main__':
+def main():
     #Hyperparameters
     ransacTol = 5.0
     keypointThr = 10
@@ -127,4 +127,6 @@ if __name__ == '__main__':
     stitcher = standardImageStitcher()
     stitcher.stitchImages(images,ransacTol,keypointThr,distanceThr)
 
+if __name__ == '__main__':
+    main()
     

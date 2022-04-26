@@ -10,26 +10,21 @@ from standardImageStitcher import standardImageStitcher as sis
 
 #Hyperparameters
 ransacTol = 5.0
-keypointThr = 100
-distanceThr = 250
+distanceThr = 200 #Only considers the keypoint matches lower than this distance.
+keypointThr = 100 #Number of minimum valid keypoints needed to stitch the images. 
+ 
+folderName = "example6"
+numberOfImages = 5
 
-image1 = cv.imread(r"example4\example4-1.jpeg")
-image2 = cv.imread(r"example4\example4-2.jpeg")
-image3 = cv.imread(r"example4\example4-3.jpeg")
-image4 = cv.imread(r"example4\example4-4.jpeg")
-image5 = cv.imread(r"example4\example4-5.jpeg")
-
-images = [image1, image2, image3, image4, image5]
-
-#Convert color from BGR to RGB
-for id,image in enumerate(images):
-    image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-    images[id] = image
+images = []
+for i in range(numberOfImages):
+    image = cv.imread(folderName+"\\"+folderName+"-"+str(i+1)+".jpg")
+    images.append(cv.cvtColor(image, cv.COLOR_BGR2RGB))
 
 stitcher = sis()
-output = stitcher.stitchImages(images,ransacTol,keypointThr,distanceThr)
+output = stitcher.stitchImages(images,ransacTol,keypointThr,distanceThr, showSteps=False)
 
 if output is not None:    
     plt.imshow(output)
     plt.show()
-    cv.imwrite("Results\Example6Output.jpg", cv.cvtColor(output, cv.COLOR_BGR2RGB)) 
+    cv.imwrite("Results\\"+folderName+"_output.jpg", cv.cvtColor(output, cv.COLOR_BGR2RGB)) 
