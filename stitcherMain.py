@@ -22,7 +22,7 @@ for i in range(numberOfImages):
     images.append(cv.cvtColor(image, cv.COLOR_BGR2RGB))
 
 stitcher = sis()
-output = stitcher.stitchImages(images,ransacTol,keypointThr,distanceThr, showSteps=False)
+output = stitcher.stitchImages(images,ransacTol,keypointThr,distanceThr,showSteps=False)
 
 if output is not None:    
     plt.imshow(output)

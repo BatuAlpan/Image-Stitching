@@ -73,7 +73,7 @@ class standardImageStitcher:
             max_x, max_y = self.findEdgeLoc(homograhyMatInv,image2)
             im1_x, im1_y = np.size(image1,1), np.size(image1,0)
             output = cv.warpPerspective(image2,homograhyMat,(max(max_x,im1_x),max(max_y,im1_y)),dst=output,
-            flags=cv.WARP_INVERSE_MAP, borderValue=cv.BORDER_CONSTANT) #Image 2 is warped with homography matrix.
+            flags=cv.WARP_INVERSE_MAP, borderValue=cv.BORDER_CONSTANT) #Image 2 is warped via the homography matrix.
 
             #Images are added by throwing away the black gaps 
             img1Gray = cv.cvtColor(image1, cv.COLOR_BGR2GRAY)
