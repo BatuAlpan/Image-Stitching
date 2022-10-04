@@ -8,6 +8,8 @@ from imutils import paths
 import argparse
 from standardImageStitcher import standardImageStitcher as sis
 
+# argument parser ile cmd argument ekle
+
 #Hyperparameters
 ransacTol = 5.0
 distanceThr = 200 #Only considers the keypoint matches lower than this distance.

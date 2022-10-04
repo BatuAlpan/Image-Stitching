@@ -7,22 +7,24 @@ import imutils
 from imutils import paths
 import argparse
 
-# argument parser ile cmd argument ekle
-# imagePaths = sorted(list(paths.list_images(args["images"])))
-# print(imagePaths)
+"""
+Note that this script is only for trial and is not used as a main code. 
+In addition to that the results may seem wrong or distorted since this script is not updated like the main scripts.
+However you are free to change the image paths and see the unsuccessful results :)
+"""
 
 # Hyperparameters
 ransacTol = 0.5
 
 image1 = cv.imread(r"examples/example4/example4-1.jpg")
 image1 = cv.cvtColor(image1, cv.COLOR_BGR2RGB)
-image2 = cv.imread(r"example4\example4-2.jpeg")
+image2 = cv.imread(r"examples/example4/example4-2.jpg")
 image2 = cv.cvtColor(image2, cv.COLOR_BGR2RGB)
-image3 = cv.imread(r"example4\example4-3.jpeg")
+image3 = cv.imread(r"examples/example4/example4-3.jpg")
 image3 = cv.cvtColor(image3, cv.COLOR_BGR2RGB)
-image4 = cv.imread(r"example4\example4-4.jpeg")
+image4 = cv.imread(r"examples/example4/example4-4.jpg")
 image4 = cv.cvtColor(image4, cv.COLOR_BGR2RGB)
-image5 = cv.imread(r"example4\example4-5.jpeg")
+image5 = cv.imread(r"examples/example4/example4-5.jpg")
 image5 = cv.cvtColor(image5, cv.COLOR_BGR2RGB)
 
 images = [image1, image2, image3, image4, image5]
@@ -32,14 +34,14 @@ def imageStitcher():
     pass
 
 
-# Finds the maximum of the edge points for bordering
+# Finds the maximum of the edge points for bordering, inputs: homography matrix and the image.
 def findEdgeLoc(matrix, image):
     length, width = np.size(image, 0), np.size(image, 1)
     edges = np.array([[0, 0, 1], [width, 0, 1], [0, length, 1], [width, length, 1]])
     max_x, max_y = 0, 0
     for loc in edges:
         newLoc = matrix.dot(loc)
-        newLoc = newLoc / newLoc[2]
+        newLoc = newLoc / newLoc[2]n
         max_x, max_y = max(max_x, newLoc[0]), max(max_y, newLoc[1])
     return int(max_x), int(max_y)
 
