@@ -41,7 +41,7 @@ def findEdgeLoc(matrix, image):
     max_x, max_y = 0, 0
     for loc in edges:
         newLoc = matrix.dot(loc)
-        newLoc = newLoc / newLoc[2]n
+        newLoc = newLoc / newLoc[2]
         max_x, max_y = max(max_x, newLoc[0]), max(max_y, newLoc[1])
     return int(max_x), int(max_y)
 
@@ -141,11 +141,7 @@ for i in range(len(images) - 1):
 stop = timeit.default_timer()
 print(f'Time: {stop - start} sec.')
 
-# height_output, width_output = output.shape[:2]
-# height_output = np.uint8(2* height_output)
-# width_output = np.uint8(2* width_output)
-# output = cv.resize(output,(width_output, height_output), cv.INTER_LINEAR)
 plt.imshow(output)
 RGB_Output = cv.cvtColor(output, cv.COLOR_BGR2RGB)
-cv.imwrite("Result.jpg", RGB_Output)
+# cv.imwrite("Result.jpg", RGB_Output)
 plt.show()
