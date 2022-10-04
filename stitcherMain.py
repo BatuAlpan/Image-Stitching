@@ -16,7 +16,7 @@ distanceThr = 200  # Only considers the keypoint matches lower than this distanc
 keypointThr = 100  # Number of minimum valid keypoints needed to stitch the images.
 
 folderName = "example7"
-numberOfImages = 4
+numberOfImages = 5
 
 images = []
 for i in range(numberOfImages):
