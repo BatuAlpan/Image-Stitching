@@ -20,6 +20,8 @@ Image stitching is the operation of combining photos taken from the same panoram
 ![Find the keypoints](https://www.researchgate.net/publication/342148975/figure/fig1/AS:901943815847936@1592051571533/SIFT-Algorithm-steps.jpg)
 ## Matching Keypoints
 
+  The keypoints are matched by using a principle called keypoint descriptors. Each detected keypoint has its own descriptor based on its gradient accross the grid inside the blob. 
+
 ## Computing the Homography Matrix
 
 ## Warping and Blending the Images 
