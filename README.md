@@ -17,7 +17,7 @@ Image stitching is the operation of combining photos taken from the same panoram
   
   Orientation of the keypoints are then found by finding the gradients accross a grid inside the blog. The most recurrent direction inside the grid is the dominant gradient direction of the keypoint. Finally, scales and orientations of the keypoints are set to a constant value so that the points become scale-invariant which will be pretty helpful in comparing and matching the images. 
 
-![alt text]([http://url/to/img.png](https://www.researchgate.net/profile/Guohui-Wang-7/publication/256546531/figure/fig1/AS:614316516577318@1523475879934/Diagram-of-SIFT-keypoint-detection-algorithm-showing-one-octave-with-6-Gaussian-image.png))
+![Find the keypoints]([http://url/to/img.png](https://www.researchgate.net/profile/Guohui-Wang-7/publication/256546531/figure/fig1/AS:614316516577318@1523475879934/Diagram-of-SIFT-keypoint-detection-algorithm-showing-one-octave-with-6-Gaussian-image.png))
 ## Matching Keypoints
 
 ## Computing the Homography Matrix
