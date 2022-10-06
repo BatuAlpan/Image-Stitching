@@ -11,10 +11,16 @@ Image stitching is the operation of combining photos taken from the same panoram
 
 ## Detecting Keypoints
 
-The first step of image stitching is detecting the keypoints/features. This is usually done by using the **SIFT (scale-invariant feature transformation)** algorithm. SIFT algorithm uses Gaussian blurred versions of the image and difference of Gaussians (DoG) technique to highlight the keypoints. The higher the sigma value of the Gaussian blur filter the higher the scale of the blob. Orientation of the keypoints are then found by finding the dominant gradient direction. Finally, scales and orientations of the keypoints are set to a constant value so that the points become scale-invariant. One great advantage of this operation is creating a huge ease in the keypoint matching operation which will be further discussed in the upcoming section. 
+  The first step of image stitching is detecting the keypoints/features. This is usually done by using the **SIFT (scale-invariant feature transformation)** algorithm. SIFT algorithm uses the Gaussian blurred versions of the image and difference of Gaussians (DoG) technique to highlight the keypoints. 
+  
+  Gaussian blur is the operation of blurring an image by using the Gaussian distribution as the matrix of filter. As the sigma value (standard deviation) gets higher the Gaussian function gets more spread out further blurring the image. The strong features on the image gets less effected by this filter. Difference of Gaussians (DoG) is a technique for feature enhancement where the Gaussian blurred versions of the image are subtracted from each other. In SIFT algorithm, first a Gaussian pyramid is formed which consists of Gaussian blurred versions of the image with different sigma values. Then the adjacent images are subtracted from each other creating a DoG pyramid. The lower layers of the pyramid correspond to a subtraction between small sigma values and the higher layers correspond to a subtraction between high sigma values. The keypoint candidates are then found by finding the local extrema inside a 3x3x3 grid on the DoG pyramid. Some of these candidates are eliminated by using a threshold and the resulting pixels are the keypoints. An extrema on the higher DoG layer will be a stronger feature therefore it will be a bigger blob and have a higher magnitude compared to the local extrema on the lower layers.   
+  
+  Orientation of the keypoints are then found by finding the gradients accross a grid inside the blog. The most recurrent direction inside the grid is the dominant gradient direction of the keypoint. Finally, scales and orientations of the keypoints are set to a constant value so that the points become scale-invariant which will be pretty helpful in comparing and matching the images. 
 
-
+![Find the keypoints](https://www.researchgate.net/publication/342148975/figure/fig1/AS:901943815847936@1592051571533/SIFT-Algorithm-steps.jpg)
 ## Matching Keypoints
+
+  The keypoints are matched by using a principle called keypoint descriptors. Each detected keypoint has its own descriptor based on its gradient accross the grid inside the blob. 
 
 ## Computing the Homography Matrix
 
