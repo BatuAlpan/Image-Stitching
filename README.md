@@ -22,13 +22,15 @@ Image stitching is the operation of combining photos taken from the same panoram
 ![Find the keypoints](https://www.researchgate.net/publication/342148975/figure/fig1/AS:901943815847936@1592051571533/SIFT-Algorithm-steps.jpg)
 ## Matching Keypoints
 
-  The keypoints are matched by using a principle called keypoint descriptors. Each detected keypoint has its own descriptor based on its gradient accross the grid inside the blob. To find the descriptor, first the blob is divided into 4 quadrants. Then a histogram of the gradient directions are created for each of the quadrants. This histogram is the keypoint descriptor.
+  The keypoints are matched by using a principle called keypoint descriptors. Each detected keypoint has its own descriptor based on its gradient accross the grid inside the blob. To find the descriptor, first the blob is divided into 4 quadrants. Then a histogram of the gradient directions are created for each of the quadrants. This histogram is the keypoint descriptor. Keypoints are matched by looking at the histogram distance between two keypoint. There are a variety of metrics to measure the distance between the keypoints such as L2 distance, intersection, Bhattacharyya distance, correlation etc. To make the calculations easier L2 distance was used in this project. 
   
-  Keypoints are matched by looking at the histogram distance between two keypoint. There are a variety of metrics to measure the distance between the keypoints such as L2 distance, intersection, Bhattacharyya distance, correlation etc. To make the calculations easier L2 distance was used in this project. Sometimes one of the images will have a very distinct keypoint. As a result of that the match of this keypoint will have a very high distance and most probably this will be a wrong match. In order to prevent this we added a distance threshold that only considers the matches under a certain distance value. This correct most of the false matches. The default value is 200 but the user can change this as a command line argument. 
+  Sometimes one of the images will have a very distinct keypoint. As a result of that the match of this keypoint will have a very high distance and most probably this will be a wrong match. In order to prevent this we added a distance threshold that only considers the matches under a certain distance value. This correct most of the false matches. The default value is 200 but the user can change this as a command line argument. In addition to that there is also a keypoint threshold. If the number of valid keypoint matches are lower than this threshold the stitching operation will be cancelled. This prevents the creation of wrong homography matrices and therefore wrong stitches.
   
 ![Keypoint descriptor](https://www.i2tutorials.com/wp-content/media/2019/09/SIFT-and-SURF-1-i2tutorials.jpg)
 
 ## Computing the Homography Matrix
+
+  Now that the keypoints are found and matched, the planes in which the 2D images are located must be transformed to the same plane. This will enable us to stitch the images. Otherwise the image will seem pretty distorted because of the plane differences. This operation is done by finding the homography matrix between the images. This matrix transforms the plane of the image to the plane of the other image.  
 
 ## Warping and Blending the Images 
 
