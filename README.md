@@ -32,9 +32,11 @@ Image stitching is the operation of combining photos taken from the same panoram
 
   Now that the keypoints are found and matched, the planes in which the 2D images are located must be transformed to the same plane. This will enable us to stitch the images. Otherwise the image will seem distorted because of the plane differences. This operation is done by finding the homography matrix between the images. This matrix transforms the plane of the image to the plane of the other image. So in other words, the homography matrix is such a matrix that transforms the keypoints in the source image to the keypoints in the destination image with minimum error. 
   
+![Homography matrix](https://docs.opencv.org/4.x/homography_transformation_example2.jpg)
+  
   Since this matrix has 8 degrees of freedom a minimum number of 4 matches (8 keypoints in total) are enough to find the homography matrix. If the matches are correct it becomes a constrained least squares problem which can be solved by a knowledge in linear algebra. However there are far more matches and sometimes some of these matches turn out to be false. In order to tackle this problem an algortithm called RANSAC (Random Sample Consensus) is implemented. Basically, this algorithm separates the outliers (wrong matches) from the inliers (correct matches). 
 
-  The first step of RANSAC is to choose 4 random pairs on the images and finding the homogprahy matrix with them. Then this matrix is applied to the other points in order to transform them to the destination image. If the distance between the transformed keypoint and the destination keypoint is lower than some treshold than it is counted as a score. The process 
+  The first step of RANSAC is to choose 4 random pairs on the images and finding the homogprahy matrix with them. Then this matrix is applied to the other points in order to transform them to the destination image. If the distance between the transformed keypoint and the destination keypoint is lower than some treshold, it is counted as a score. The process is repeated untill all the combinations are achieved. Finally the 4 points that have the highest score will be selected as the basis forcalculating the homogrpahy matrix. This algortihm works pretty well as long as the number of correct matches are higher than the wrong matches. However, one disadvantage is that it took long to run because all the combinations are considered during the operation. 
   
 ## Warping and Blending the Images 
 
