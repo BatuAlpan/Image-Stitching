@@ -30,7 +30,9 @@ Image stitching is the operation of combining photos taken from the same panoram
 
 ## Computing the Homography Matrix
 
-  Now that the keypoints are found and matched, the planes in which the 2D images are located must be transformed to the same plane. This will enable us to stitch the images. Otherwise the image will seem pretty distorted because of the plane differences. This operation is done by finding the homography matrix between the images. This matrix transforms the plane of the image to the plane of the other image.  
+  Now that the keypoints are found and matched, the planes in which the 2D images are located must be transformed to the same plane. This will enable us to stitch the images. Otherwise the image will seem distorted because of the plane differences. This operation is done by finding the homography matrix between the images. This matrix transforms the plane of the image to the plane of the other image. So in other words, the homography matrix is such a matrix that transforms the keypoints in the source image to the keypoints in the destination image with minimum error. 
+  
+  Since this matrix has 8 degrees of freedom a minimum number of 4 matches (8 keypoints in total) are enough to find the homography matrix. If the matches are correct it becomes a constrained least squares problem which can be solved by a knowledge in linear algebra. However there are far more matches and sometimes some of these matches turn out to be false. In order to tackle this problem an algortithm called RANSAC (Random Sample Consensus)  
 
 ## Warping and Blending the Images 
 
