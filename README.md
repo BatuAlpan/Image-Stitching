@@ -40,7 +40,7 @@ Image stitching is the operation of combining photos taken from the same panoram
   
 ## Warping and Blending the Images 
 
-  The final part of image stitching is warping and blending these two images. Warping is the operation of transforming one image to the other one by using the homogrpahy matrix. In the end of this operation images will be on the same plane. Then blending is applied to combine the images. Even though this step is optional, in some cases it can reduce the distortion. 
+  The final part of image stitching is warping and blending these two images. Warping is the operation of transforming one image to the other one by using the homogrpahy matrix. In the end of this operation images will be on the same plane and ready to be stitched. However, sometimes there are exposure differences between the images. These may cause unnatural brightness differences on the region of intersection of the images. This problem can be solved by applying blending. Even though this step is optional, in some cases it will reduce this unnatural look. Blending is basically multiplying the pixel values located on the region of intersection with a weight and adding them. Since the weights are diminishing towards the edges of the image, the result will seem smoother than the original.  
 
 Batu ALPAN <br />
 Deniz Altay AVCI
