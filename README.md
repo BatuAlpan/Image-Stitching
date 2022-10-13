@@ -19,7 +19,7 @@ Image stitching is the operation of combining photos taken from the same panoram
   
   Orientation of the keypoints are then found by finding the gradients accross a grid inside the blog. The most recurrent direction inside the grid is the dominant gradient direction of the keypoint. Finally, scales and orientations of the keypoints are set to a constant value so that the points become scale-invariant which will be pretty helpful in comparing and matching the images. 
 
-![Find the keypoints](https://www.researchgate.net/publication/342148975/figure/fig1/AS:901943815847936@1592051571533/SIFT-Algorithm-steps.jpg)
+![Find the keypoints](https://www.researchgate.net/publication/342148975/figure/fig1/AS:901943815847936@1592051571533/SIFT-Algorithm-steps.jpg](https://docs.opencv.org/4.x/sift_dog.jpg)
 ## Matching Keypoints
 
   The keypoints are matched by using a principle called keypoint descriptors. Each detected keypoint has its own descriptor based on its gradient accross the grid inside the blob. To find the descriptor, first the blob is divided into 4 quadrants. Then a histogram of the gradient directions are created for each of the quadrants. This histogram is the keypoint descriptor. Keypoints are matched by looking at the histogram distance between two keypoint. There are a variety of metrics to measure the distance between the keypoints such as L2 distance, intersection, Bhattacharyya distance, correlation etc. To make the calculations easier L2 distance was used in this project. 
